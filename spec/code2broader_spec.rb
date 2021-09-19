@@ -38,5 +38,12 @@ RSpec.describe CoSFile do
       expect(file.code2broader("8210020120200000")).to eq "8210020120000000"
       expect(file.code2broader("8210020120210000")).to eq "8210020120000000"
     end
+    it "should treat a list of historical figures" do
+      file = CoSFile.new(example_file)
+      expect(file.code2broader("8220265230100000")).to eq "8220265230000000"
+      expect(file.code2broader("8220265230200000")).to eq "8220265230000000"
+      expect(file.code2broader("8220265231000000")).to eq "8220265230000000"
+      expect(file.code2broader("8220265231100000")).to eq "8220265230000000"
+    end
   end
 end
