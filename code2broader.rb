@@ -36,6 +36,14 @@ class CoSFile
     idx = code_numbers.reverse.find_index{|i| i != "0" }
     #p [idx: idx]
     return nil if idx.nil?
+    if idx == 10 and code_numbers[4] == "1"
+      new_codes = code_numbers.dup
+      new_codes[4] = "0"
+      new_code = new_codes.join
+      if @codes[new_code]
+        return new_code
+      end
+    end
     code_numbers[16-idx-1] = "0"
     new_code = code_numbers.join
     #p [new_code: new_code]
