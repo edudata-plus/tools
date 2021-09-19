@@ -60,6 +60,16 @@ class CoSFile
         return new_code
       end
     end
+    if code_numbers[2] == "1" and code_numbers[4] == "0" and idx <= 6 #国語 別表 学年別漢字配当表
+      new_codes = code_numbers.dup
+      new_codes[9] = "0"
+      new_codes[10] = "0"
+      new_codes[11] = "0"
+      new_code = new_codes.join
+      if @codes[new_code]
+        return new_code
+      end
+    end
     code_numbers[16-idx-1] = "0"
     new_code = code_numbers.join
     #p [new_code: new_code]
