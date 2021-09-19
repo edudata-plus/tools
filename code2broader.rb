@@ -52,6 +52,14 @@ class CoSFile
         return new_code
       end
     end
+    if code_numbers[5] != "0"
+      new_codes = code_numbers.dup
+      new_codes[5] = "0"
+      new_code = new_codes.join
+      if @codes[new_code]
+        return new_code
+      end
+    end
     code_numbers[16-idx-1] = "0"
     new_code = code_numbers.join
     #p [new_code: new_code]
