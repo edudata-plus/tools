@@ -3,7 +3,7 @@ require "code2broader.rb"
 
 RSpec.describe CoSFile do
   context "code2broader" do
-    example_file = File.join(File.dirname(__FILE__), "..", "examples/20201016-mxt_syoto01-000010374_3.xlsx")
+    example_file = File.join(File.dirname(__FILE__), "..", "examples","20210820-mxt_syoto01-000010374_01.xlsx")
     it "should work basic functions" do
       file = CoSFile.new(example_file)
       expect(file).not_to be_nil
