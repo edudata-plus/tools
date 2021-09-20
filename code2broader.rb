@@ -81,6 +81,24 @@ class CoSFile
         return new_code
       end
     end
+    if %q[7 8 9 A].include? code_numbers[1]
+      new_codes = code_numbers.dup
+      new_codes[16-idx-1] = "0"
+      new_code = new_codes.join
+      return new_code if @codes[new_code]
+      new_codes[1] = "6"
+      new_code = new_codes.join
+      return new_code if @codes[new_code]
+    end
+    if %q[C D E F G].include? code_numbers[1]
+      new_codes = code_numbers.dup
+      new_codes[16-idx-1] = "0"
+      new_code = new_codes.join
+      return new_code if @codes[new_code]
+      new_codes[1] = "B"
+      new_code = new_codes.join
+      return new_code if @codes[new_code]
+    end
     code_numbers[16-idx-1] = "0"
     new_code = code_numbers.join
     #p [new_code: new_code]

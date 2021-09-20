@@ -4,6 +4,7 @@ require "code2broader.rb"
 RSpec.describe CoSFile do
   context "code2broader" do
     example_file = File.join(File.dirname(__FILE__), "..", "examples","20210820-mxt_syoto01-000010374_01.xlsx")
+    example_file2 = File.join(File.dirname(__FILE__), "..", "examples","000090504.xlsx")
     it "should work basic functions" do
       file = CoSFile.new(example_file)
       expect(file).not_to be_nil
@@ -45,6 +46,11 @@ RSpec.describe CoSFile do
       expect(file.code2broader("8220265230200000")).to eq "8220265230000000"
       expect(file.code2broader("8220265231000000")).to eq "8220265230000000"
       expect(file.code2broader("8220265231100000")).to eq "8220265230000000"
+    end
+    it "should treat 2nd digit for several types of disabilities" do
+      file = CoSFile.new(example_file2)
+      expect(file.code2broader("8700000331400000")).to eq "8600000331000000"
+      expect(file.code2broader("8900000331500000")).to eq "8600000331000000"
     end
   end
 end
