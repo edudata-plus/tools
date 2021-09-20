@@ -18,6 +18,7 @@ RSpec.describe CoSFile do
       file = CoSFile.new(example_file)
       expect(file.code2broader("8210000000000000")).to eq "82n0000000000000"
       expect(file.code2broader("82200L0000000000")).to eq "82n0000000000000"
+      expect(file.code2broader("82n0000000000000")).to eq "8200000000000000"
     end
     it "should treat 6th digit as zero for all the grades" do
       file = CoSFile.new(example_file)

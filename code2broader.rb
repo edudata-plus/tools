@@ -37,11 +37,13 @@ class CoSFile
     #p [idx: idx]
     return nil if idx.nil?
     if idx == 13 or ( idx == 10 and code_numbers[3] == "0" and code_numbers[4] == "0" )
-      new_codes = code_numbers.dup
-      new_codes[2] = "n"
-      new_code = new_codes.join
-      if @codes[new_code]
-        return new_code
+      if code_numbers[2] != "n"
+        new_codes = code_numbers.dup
+        new_codes[2] = "n"
+        new_code = new_codes.join
+        if @codes[new_code]
+          return new_code
+        end
       end
     end
     if idx == 10 and code_numbers[4] == "1"
