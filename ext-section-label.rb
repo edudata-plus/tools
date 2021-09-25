@@ -15,7 +15,9 @@ end
 
 if $0 == __FILE__
   xlsx = Roo::Excelx.new(ARGV[0], {headers: true})
-  #xlsx.default_sheet = "all_数字はAに"
+  if ARGV[1]
+    xlsx.default_sheet = ARGV[1]
+  end
   idx = nil
   idx_text = nil
   print "\xEF\xBB\xBF" #UTF-8 BOM
