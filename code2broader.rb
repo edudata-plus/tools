@@ -72,7 +72,9 @@ class CoSFile
         return new_code
       end
     end
-    if code.start_with? "822026523" and idx <= 6 #社会科 人物リスト
+    if idx <= 6 and
+        ( code.start_with? "822026523" or       #社会科 人物リスト
+          code.start_with? "828030029" )        #音楽 音符記号等
       new_codes = code_numbers.dup
       new_codes[9] = "0"
       new_codes[10] = "0"
