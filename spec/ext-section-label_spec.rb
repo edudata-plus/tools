@@ -52,5 +52,9 @@ RSpec.describe "extract_section_label" do
     expect(result[:section]).to eq "㋑"
     expect(result[:text]).to eq "凸レンズの働き凸レンズの働きについての実験を行い，物体の位置と像のでき方との関係を見いだして理解すること。"
 
+    result = extract_section_label("(b) 主語＋動詞＋間接目的語＋how（など）to不定詞")
+    expect(result[:section]).to eq "(b)"
+    expect(result[:text]).to eq "主語＋動詞＋間接目的語＋how（など）to不定詞"
+
   end
 end
