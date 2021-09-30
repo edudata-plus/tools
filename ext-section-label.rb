@@ -3,6 +3,8 @@
 require "csv"
 require "roo"
 
+require_relative "cosfile.rb"
+
 def extract_section_label(str)
   result = {}
   normalized_str = str.strip.tr("　Ａ-Ｚａ-ｚ０-９ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ（）", " A-Za-z0-9アイウエオカキクケコサシスセソタチツテト()")
