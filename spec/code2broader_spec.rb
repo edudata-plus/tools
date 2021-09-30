@@ -62,6 +62,11 @@ RSpec.describe CoSFile do
       expect(file.code2broader("8280300290200000")).to eq "8280300290000000"
       expect(file.code2broader("8280300291000000")).to eq "8280300290000000"
       expect(file.code2broader("8280300291100000")).to eq "8280300290000000"
+      file = CoSFile.new(example_file[:v72])
+      expect(file.code2broader("7280300260100000")).to eq "7280300260000000"
+      expect(file.code2broader("7280300260200000")).to eq "7280300260000000"
+      expect(file.code2broader("7280300261000000")).to eq "7280300260000000"
+      expect(file.code2broader("7280300261100000")).to eq "7280300260000000"
     end
     it "should treat 2nd digit for several types of disabilities" do
       file = CoSFile.new(example_file[:v86])
