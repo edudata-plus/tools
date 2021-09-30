@@ -48,5 +48,9 @@ RSpec.describe "extract_section_label" do
     expect(result[:section]).to eq "a"
     expect(result[:text]).to eq "単文"
 
+    result = extract_section_label("㋑ 凸レンズの働き凸レンズの働きについての実験を行い，物体の位置と像のでき方との関係を見いだして理解すること。")
+    expect(result[:section]).to eq "㋑"
+    expect(result[:text]).to eq "凸レンズの働き凸レンズの働きについての実験を行い，物体の位置と像のでき方との関係を見いだして理解すること。"
+
   end
 end
