@@ -54,7 +54,7 @@ RSpec.describe "extract_section_label" do
 
     result = extract_section_label("(b) 主語＋動詞＋間接目的語＋how（など）to不定詞")
     expect(result[:section]).to eq "(b)"
-    expect(result[:text]).to eq "主語＋動詞＋間接目的語＋how（など）to不定詞"
+    expect(result[:text]).to eq "主語＋動詞＋間接目的語＋how(など)to不定詞"
 
     result = extract_section_label("第１款　高等学校教育の基本と教育課程の役割")
     expect(result[:section]).to eq "第1款"
@@ -63,6 +63,10 @@ RSpec.describe "extract_section_label" do
     result = extract_section_label("ａ 金種を用いる。")
     expect(result[:section]).to eq "a"
     expect(result[:text]).to eq "金種を用いる。"
+
+    result = extract_section_label("(4）私たちと国際社会の諸課題")
+    expect(result[:section]).to eq "(4)"
+    expect(result[:text]).to eq "私たちと国際社会の諸課題"
 
   end
 end
