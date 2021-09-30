@@ -60,5 +60,9 @@ RSpec.describe "extract_section_label" do
     expect(result[:section]).to eq "第1款"
     expect(result[:text]).to eq "高等学校教育の基本と教育課程の役割"
 
+    result = extract_section_label("ａ 金種を用いる。")
+    expect(result[:section]).to eq "a"
+    expect(result[:text]).to eq "金種を用いる。"
+
   end
 end
