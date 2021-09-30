@@ -6,7 +6,7 @@ require "roo"
 def extract_section_label(str)
   result = {}
   normalized_str = str.tr("　Ａ-Ｚａ-ｚ０-９ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ", " A-Za-z0-9アイウエオカキクケコサシスセソタチツテト")
-  if /\A(第\d+章|第\d+節|第\d+|\(\d+\)|\([a-z]+\)|\d+|\(?[ア-ン]\)?|[A-Za-z]+|[①-⑳]|[㋐-㋻])\s+(.+)\z/m =~ normalized_str
+  if /\A(第\d+章|第\d+款|第\d+節|第\d+|\(\d+\)|\([a-z]+\)|\d+|\(?[ア-ン]\)?|[A-Za-z]+|[①-⑳]|[㋐-㋻])\s+(.+)\z/m =~ normalized_str
     { section: $1, text: $2 }
   else
     { text: normalized_str }
