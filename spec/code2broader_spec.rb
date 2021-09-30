@@ -5,8 +5,9 @@ RSpec.describe CoSFile do
   context "code2broader" do
     example_file = {
       v82: File.join(File.dirname(__FILE__), "..", "examples","20210820-mxt_syoto01-000010374_01.xlsx"),
+      v83: File.join(File.dirname(__FILE__), "..", "examples","20201016-mxt_syoto01-000010374_4.xlsx"),
       v86: File.join(File.dirname(__FILE__), "..", "examples","000090504.xlsx"),
-      v72: File.join(File.dirname(__FILE__), "..", "examples","000083948.xlsx")
+      v72: File.join(File.dirname(__FILE__), "..", "examples","000083948.xlsx"),
     }
     it "should work basic functions" do
       file = CoSFile.new(example_file[:v82])
@@ -62,6 +63,12 @@ RSpec.describe CoSFile do
       expect(file.code2broader("8280300290200000")).to eq "8280300290000000"
       expect(file.code2broader("8280300291000000")).to eq "8280300290000000"
       expect(file.code2broader("8280300291100000")).to eq "8280300290000000"
+      file = CoSFile.new(example_file[:v83])
+      expect(file.code2broader("83803002A0100000")).to eq "83803002A0000000"
+      expect(file.code2broader("83803002A0200000")).to eq "83803002A0000000"
+      expect(file.code2broader("83803002A0300000")).to eq "83803002A0000000"
+      expect(file.code2broader("83803002A1000000")).to eq "83803002A0000000"
+      expect(file.code2broader("83803002A1100000")).to eq "83803002A0000000"
       file = CoSFile.new(example_file[:v72])
       expect(file.code2broader("7280300260100000")).to eq "7280300260000000"
       expect(file.code2broader("7280300260200000")).to eq "7280300260000000"

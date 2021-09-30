@@ -76,6 +76,7 @@ class CoSFile
         ( code.start_with? "822026523" or       #社会科 人物リスト
           code.start_with? "722026514" or
           code.start_with? "828030029" or       #音楽 音符記号等
+          code.start_with? "83803002A" or
           code.start_with? "728030026" )
       new_codes = code_numbers.dup
       new_codes[9] = "0"
