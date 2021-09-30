@@ -68,5 +68,8 @@ RSpec.describe "extract_section_label" do
     expect(result[:section]).to eq "(4)"
     expect(result[:text]).to eq "私たちと国際社会の諸課題"
 
+    result = extract_section_label(" (ｲ) 無脊椎《せきつい》動物の仲間\n無脊椎《せきつい》動物の観察などを行い，その観察記録に基づいて，それらの動物の特徴を見いだすこと。")
+    expect(result[:section]).to eq "(イ)"
+    expect(result[:text]).to eq "無脊椎《せきつい》動物の仲間\n無脊椎《せきつい》動物の観察などを行い，その観察記録に基づいて，それらの動物の特徴を見いだすこと。"
   end
 end
