@@ -14,25 +14,12 @@ def extract_section_label(str)
 end
 
 if $0 == __FILE__
-  xlsx = Roo::Excelx.new(ARGV[0], {headers: true})
-  if ARGV[1]
-    xlsx.default_sheet = ARGV[1]
-  end
-  idx = nil
-  idx_text = nil
   print "\xEF\xBB\xBF" #UTF-8 BOM
+  include CoSFile
   csv_str = CSV.generate(row_sep: "\r\n") do |csv|
-    xlsx.each_row_streaming(pad_cells: true) do |row|
-      if idx.nil?
-        row.each_with_index do |r, i|
-          idx = i if r and r.value == "学習指導要領コード"
-          idx_text = i if r and r.value == "学習指導要領テキスト"
-        end
-        next
-      end
-      next if row[idx].value.nil?
-      result = extract_section_label(row[idx_text].value)
-      csv << [ row[idx], #row[idx_text],
+    parse_xlsx(ARGV[0], ARGV[1]) do |code, text|
+      result = extract_section_label(text)
+      csv << [ code, #row[idx_text],
                result[:section], result[:text].gsub(/\n/, "\r\n") ]
     end
   end

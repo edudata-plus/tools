@@ -1,30 +1,14 @@
 #!/usr/bin/env ruby
 
-require "roo"
+require_relative "cosfile.rb"
 
-class CoSFile
+class Code2Broder
+  include CoSFile
   attr_reader :codes
   def initialize(file, sheet = nil)
     @codes = {}
-    xlsx = Roo::Excelx.new(file, {headers: true})
-    xlsx.default_sheet = sheet if sheet
-    idx = nil
-    xlsx.each_row_streaming(pad_cells: true) do |row|
-      if idx.nil?
-        row.each_with_index do |r, i|
-          idx = i if r and r.value == "学習指導要領コード"
-        end
-        next
-      end
-      #p row
-      #p row[7]
-      #p row["教育要領コード"]
-      next if row[idx].value.nil?
-      if row[idx].value.size != 16
-        STDERR.puts "skip not 16 digit: [#{row[idx].value.to_s.dump}]"
-        next
-      end
-      @codes[row[idx].value] = true
+    parse_xlsx(file, sheet) do |code|
+      @codes[code] = true
     end
     #p @codes.keys[0..10]
     #p @codes.keys.size
@@ -116,7 +100,7 @@ class CoSFile
 end
 
 if $0 == __FILE__
-  cos = CoSFile.new(ARGV[0], "all_数字はAに")
+  cos = Code2Broder.new(ARGV[0], "all_数字はAに")
   if ARGV[1]
     p cos.code2broader(ARGV[1])
   else
