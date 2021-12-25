@@ -13,14 +13,23 @@ class Code2Broder
     #p @codes.keys[0..10]
     #p @codes.keys.size
   end
-  def code2broader(code)
+  def code2broader(code, original = nil)
     #p code
     code_numbers = code.scan(/./)
     #p code_numbers
     idx = code_numbers.reverse.find_index{|i| i != "0" }
-    #p [idx: idx]
+    #p [code, idx]
+    #p original
     return nil if idx.nil?
     if idx == 13 or ( idx == 10 and code_numbers[3] == "0" and code_numbers[4] == "0" )
+      if original and %q[3 4 5 6].include? original[5]
+        new_codes = code_numbers.dup
+        new_codes[5] = "L"
+        new_code = new_codes.join
+        if @codes[new_code]
+          return new_code
+        end
+      end
       if code_numbers[2] != "n"
         new_codes = code_numbers.dup
         new_codes[2] = "n"
@@ -94,7 +103,7 @@ class Code2Broder
     if @codes[new_code]
       new_code
     else
-      code2broader(new_code)
+      code2broader(new_code, original || code)
     end
   end
 end
