@@ -39,9 +39,17 @@ class Code2Broder
         end
       end
     end
-    if idx == 10 and code_numbers[4] == "1"
+    if idx == 10 and code_numbers[4] != "0"
       new_codes = code_numbers.dup
       new_codes[4] = "0"
+      new_code = new_codes.join
+      if @codes[new_code]
+        return new_code
+      end
+    end
+    if idx == 10 and code_numbers[3] != "0"
+      new_codes = code_numbers.dup
+      new_codes[3] = "0"
       new_code = new_codes.join
       if @codes[new_code]
         return new_code

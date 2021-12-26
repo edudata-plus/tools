@@ -83,6 +83,8 @@ RSpec.describe Code2Broder do
     it "should treat 6th digit as L for 3 to 6 grades" do
       file = Code2Broder.new(example_file[:v82])
       expect(file.code2broader("8220230000000000")).to eq "82200L0000000000"
+      expect(file.code2broader("82202L0000000000")).to eq "82200L0000000000"
+      expect(file.code2broader("82H12D0000000000")).to eq "82H02D0000000000"
     end
   end
 end
