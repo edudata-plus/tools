@@ -6,6 +6,7 @@ RSpec.describe Code2Broder do
     example_file = {
       v82: File.join(File.dirname(__FILE__), "..", "examples","20210820-mxt_syoto01-000010374_01.xlsx"),
       v83: File.join(File.dirname(__FILE__), "..", "examples","20201016-mxt_syoto01-000010374_4.xlsx"),
+      v84: File.join(File.dirname(__FILE__), "..", "examples","000102423.xlsx"),
       v86: File.join(File.dirname(__FILE__), "..", "examples","000090504.xlsx"),
       v72: File.join(File.dirname(__FILE__), "..", "examples","000083948.xlsx"),
     }
@@ -85,6 +86,10 @@ RSpec.describe Code2Broder do
       expect(file.code2broader("8220230000000000")).to eq "82200L0000000000"
       expect(file.code2broader("82202L0000000000")).to eq "82200L0000000000"
       expect(file.code2broader("82H12D0000000000")).to eq "82H02D0000000000"
+    end
+    it "should treat 4th digit '0' as a parent" do
+      file = Code2Broder.new(example_file[:v84])
+      expect(file.code2broader("84I1500000000000")).to eq "84I0500000000000"
     end
   end
 end
