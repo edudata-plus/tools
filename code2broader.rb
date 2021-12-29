@@ -125,12 +125,26 @@ class Code2Broder
 end
 
 if $0 == __FILE__
+  opt_tsv = false
+  if ARGV[0] == "-tsv"
+    opt_tsv = true
+    ARGV.shift
+  end
   cos = Code2Broder.new(ARGV[0], "all_数字はAに")
-  if ARGV[1]
-    p cos.code2broader(ARGV[1])
+  if opt_tsv
+    if ARGV[1]
+      p cos.code2broader(ARGV[1])
+    else
+      cos.codes.keys.sort.each do |c|
+        puts [c, cos.code2broader(c)].join("\t")
+      end
+    end
   else
+    puts "@prefix cs: <https://w3id.org/jp-cos/>."
+    puts "@prefix schema: <http://schema.org/>."
     cos.codes.keys.sort.each do |c|
-      puts [c, cos.code2broader(c)].join("\t")
+      parent = cos.code2broader(c)
+      puts "cs:#{parent} schema:hasPart cs:#{c}." if parent
     end
   end
 end
