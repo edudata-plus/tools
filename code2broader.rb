@@ -21,6 +21,14 @@ class Code2Broder
     #p [code, idx]
     #p original
     return nil if idx.nil?
+    if %q[4 B C D E F G H].include? code_numbers[1] and (("P".."Z").cover? code_numbers[2] or ("a".."k").cover? code_numbers[2])
+      new_codes = code_numbers.dup
+      new_codes[2] = "o"
+      new_code = new_codes.join
+      if @codes[new_code]
+        return new_code
+      end
+    end
     if idx == 13 or ( idx == 10 and code_numbers[3] == "0" and code_numbers[4] == "0" )
       if original and %q[3 4 5 6].include? original[5]
         new_codes = code_numbers.dup

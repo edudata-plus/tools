@@ -91,5 +91,9 @@ RSpec.describe Code2Broder do
       file = Code2Broder.new(example_file[:v84])
       expect(file.code2broader("84I1500000000000")).to eq "84I0500000000000"
     end
+    it "should tread 3rd digit 'o' as a parent for other special subjects" do
+      file = Code2Broder.new(example_file[:v84])
+      expect(file.code2broader("84P0000000000000")).to eq "84o0000000000000"
+    end
   end
 end
