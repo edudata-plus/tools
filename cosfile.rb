@@ -27,7 +27,7 @@ module CoSFile
       text = row[idx_text].value
       if text.start_with? "<html>"
         text.sub!(/\A<html>/, "")
-        text.sub!(/<html>\z/, "")
+        text.sub!(/<\/html>\z/, "")
       end
       yield(row[idx].value, text)
     end
