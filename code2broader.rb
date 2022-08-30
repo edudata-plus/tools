@@ -117,11 +117,9 @@ class Code2Broader
       new_codes = code_numbers.dup
       new_codes[16-idx-1] = "0"
       new_code = new_codes.join
-      p new_code
       return new_code if @codes[new_code]
       new_codes[1] = "C"
       new_code = new_codes.join
-      p [new_code, @codes[new_code]]
       return new_code if @codes[new_code]
     end
     if %q[C D E F G H].include? code_numbers[1]
