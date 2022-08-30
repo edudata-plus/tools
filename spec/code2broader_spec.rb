@@ -9,6 +9,7 @@ RSpec.describe Code2Broader do
       v84: File.join(File.dirname(__FILE__), "..", "examples","000102423.xlsx"),
       v86: File.join(File.dirname(__FILE__), "..", "examples","000090504.xlsx"),
       v72: File.join(File.dirname(__FILE__), "..", "examples","000083948.xlsx"),
+      v8B: File.join(File.dirname(__FILE__), "..", "examples","000147162.xlsx"),
     }
     it "should work basic functions" do
       file = Code2Broader.new(example_file[:v82])
@@ -94,6 +95,10 @@ RSpec.describe Code2Broader do
     it "should tread 3rd digit 'o' as a parent for other special subjects" do
       file = Code2Broader.new(example_file[:v84])
       expect(file.code2broader("84P0000000000000")).to eq "84o0000000000000"
+    end
+    it "should treat 2nd digit 'C' as a parent for othe special subjects" do
+      file = Code2Broader.new(example_file[:v8B])
+      expect(file.code2broader("8Hn0000240000000")).to eq "8Cn0000200000000"
     end
   end
 end
