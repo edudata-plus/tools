@@ -2,17 +2,26 @@
 
 require_relative "cosfile.rb"
 
-class Code2Broder
+class Code2Broader
   include CoSFile
-  attr_reader :codes
+  attr_reader :codes, :labels
   def initialize(file, sheet = nil)
     @codes = {}
-    parse_xlsx(file, sheet) do |code|
+    @labels = {}
+    parse_xlsx(file, sheet) do |code, text|
       @codes[code] = true
+      @labels[code] = extract_section_label(text)
     end
     #p @codes.keys[0..10]
-    #p @codes.keys.size
+    STDERR.puts "#{@codes.keys.size} codes loaded..."
   end
+  def each
+    @codes.keys.sort.each do |code|
+      yield code
+    end
+  end
+  include Enumerable
+
   def code2broader(code, original = nil)
     #p code
     code_numbers = code.scan(/./)
@@ -122,6 +131,16 @@ class Code2Broder
       code2broader(new_code, original || code)
     end
   end
+
+  def extract_section_label(str)
+    result = {}
+    normalized_str = str.strip.tr("　Ａ-Ｚａ-ｚ０-９ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ（）", " A-Za-z0-9アイウエオカキクケコサシスセソタチツテト()")
+    if /\A(第\d+章|第\d+款|第\d+節|第\d+|\(\d+\)|\([a-z]+\)|\d+|\(?[ア-ン]\)?|[A-Za-z]+|[①-⑳]|[㋐-㋻])\s*(.+)\z/m =~ normalized_str
+      { section: $1, text: $2.strip }
+    else
+      { text: normalized_str.strip }
+    end
+  end
 end
 
 if $0 == __FILE__
@@ -130,7 +149,7 @@ if $0 == __FILE__
     opt_tsv = true
     ARGV.shift
   end
-  cos = Code2Broder.new(ARGV[0], "all_数字はAに")
+  cos = Code2Broader.new(ARGV[0], "all_数字はAに")
   if opt_tsv
     if ARGV[1]
       p cos.code2broader(ARGV[1])
