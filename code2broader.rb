@@ -95,6 +95,8 @@ class Code2Broader
       L: %q[ 3 4 5 6 ],
       M: %q[ 4 5 ],
       N: %q[ 4 5 6 ],
+      d: %q[ a b ],
+      e: %q[ b c ],
     }.each do |group_code, numbers|
       if numbers.include? code_numbers[5]
         new_codes = code_numbers.dup
