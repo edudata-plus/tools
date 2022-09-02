@@ -100,7 +100,7 @@ RSpec.describe Code2Broader do
       file = Code2Broader.new(example_file[:v8B])
       expect(file.code2broader("8Hn0000240000000")).to eq "8Cn0000200000000"
     end
-    it "should " do
+    it "should treat 6th digit" do
       file = Code2Broader.new(example_file[:v82])
       expect(file.code2broader("82G0233710000000")).to eq "82G02C3700000000"
     end
