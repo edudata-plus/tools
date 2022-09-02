@@ -84,7 +84,7 @@ RSpec.describe Code2Broader do
     end
     it "should treat 6th digit as L for 3 to 6 grades" do
       file = Code2Broader.new(example_file[:v82])
-      expect(file.code2broader("8220230000000000")).to eq "82200L0000000000"
+      expect(file.code2broader("8220230000000000")).to eq "82202L0000000000"
       expect(file.code2broader("82202L0000000000")).to eq "82200L0000000000"
       expect(file.code2broader("82H12D0000000000")).to eq "82H02D0000000000"
     end
@@ -99,6 +99,10 @@ RSpec.describe Code2Broader do
     it "should treat 2nd digit 'C' as a parent for othe special subjects" do
       file = Code2Broader.new(example_file[:v8B])
       expect(file.code2broader("8Hn0000240000000")).to eq "8Cn0000200000000"
+    end
+    it "should " do
+      file = Code2Broader.new(example_file[:v82])
+      expect(file.code2broader("82G0233710000000")).to eq "82G02C3700000000"
     end
   end
 end

@@ -80,6 +80,31 @@ class Code2Broader
         return new_code
       end
     end
+    { 
+      A: %q[ 1 2 ],
+      B: %q[ 2 3 ],
+      C: %q[ 3 4 ],
+      D: %q[ 5 6 ],
+      E: %q[ 1 2 3 ],
+      F: %q[ 1 2 3 4 ],
+      G: %q[ 1 2 3 4 5 ],
+      H: %q[ 2 3 4 ],
+      I: %q[ 2 3 4 5 ],
+      J: %q[ 2 3 4 5 6 ],
+      K: %q[ 3 4 5 ],
+      L: %q[ 3 4 5 6 ],
+      M: %q[ 4 5 ],
+      N: %q[ 4 5 6 ],
+    }.each do |group_code, numbers|
+      if numbers.include? code_numbers[5]
+        new_codes = code_numbers.dup
+        new_codes[5] = group_code.to_s
+        new_code = new_codes.join
+        if @codes[new_code]
+          return new_code
+        end
+      end
+    end
     if code_numbers[2] == "1" and code_numbers[4] == "0" and idx <= 6 #国語 別表 学年別漢字配当表
       new_codes = code_numbers.dup
       new_codes[9] = "0"
