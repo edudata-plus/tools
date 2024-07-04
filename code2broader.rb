@@ -64,6 +64,14 @@ class Code2Broader
         return new_code
       end
     end
+    if idx == 8 and code_numbers[6] != "0"
+      new_codes = code_numbers.dup
+      new_codes[6] = "0"
+      new_code = new_codes.join
+      if @codes[new_code]
+        return new_code
+      end
+    end
     if code_numbers[3] != "0"
       new_codes = code_numbers.dup
       new_codes[3] = "0"

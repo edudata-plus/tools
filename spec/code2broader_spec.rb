@@ -104,5 +104,10 @@ RSpec.describe Code2Broader do
       file = Code2Broader.new(example_file[:v82])
       expect(file.code2broader("82G0233710000000")).to eq "82G02C3700000000"
     end
+    it "should treat Civic Field in Lower Secondary School" do
+      file = Code2Broader.new(example_file[:v83])
+      expect(file.code2broader("8323232400000000")).to eq "8323230400000000"
+      # expect(file.code2broader("8323232100000000")).to eq "8323232400000000"
+    end
   end
 end
